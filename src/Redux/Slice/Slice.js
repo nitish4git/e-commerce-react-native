@@ -52,9 +52,7 @@ const cartSlice = createSlice({
     // Increading the no. of quantity
     increaseQuantity: (state, action) => {
       const product = action.payload;
-      console.log(product, 'same data');
       const existingItem = state.items.find(item => item.id === product.id);
-      console.log(existingItem, 'data from increase redux');
       if (existingItem) {
         existingItem.quantity += 1;
       }

@@ -24,7 +24,6 @@ const Counter = (props) => {
    
     const handleIncreaseBtn = (item) =>{
         dispatch(increaseQuantity(item))
-        console.log(item,"data when button is clicked")
     }
   return (
     <View style={styles.container}>

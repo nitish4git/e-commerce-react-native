@@ -18,7 +18,6 @@ import emptyCartIcon from '../../../assets/images/empty-cart.png';
 const Cartscreen = () => {
   const cartItems = useSelector(state => state.cart.items);
   const flatCartItems = cartItems.flat();
-  console.log(flatCartItems);
 
   const totalPrice = flatCartItems.flat().reduce((sum, item) => {
     const price = parseFloat(item.price.replace(/,/g, ''));
