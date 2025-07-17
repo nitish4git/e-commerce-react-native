@@ -1,9 +1,9 @@
 import { ActivityIndicator, FlatList, Image, StyleSheet, Text, View } from 'react-native'
 import React from 'react';
 import {products} from '../constants';
+import { useSelector } from 'react-redux';
 
 const Profile = () => {
-  
   return (
     <View style={{display:"flex",justifyContent:"center",alignItems:"center",marginTop:"50%"}}>
          

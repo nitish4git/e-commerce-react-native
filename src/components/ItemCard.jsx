@@ -3,7 +3,6 @@ import React from 'react';
 import headphoneImage from "../../assets/images/ProductImages/headphone.png"
 
 const ItemCard = (props) => {
-    console.log(props);
   return (
     <View style={styles.container}>
         <View style={styles.imageContainer}>

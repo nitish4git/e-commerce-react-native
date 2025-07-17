@@ -6,36 +6,40 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React, { useState } from 'react';
+import React, { use, useState } from 'react';
 import ItemHeader from './ItemHeader';
 import { useNavigation } from '@react-navigation/native';
 import headphoneImage from '../../assets/images/ProductImages/headphone.png';
 import heartImage from '../../assets/images/heart.png';
 import cartImage from '../../assets/images/online-shopping.png';
 import fillHeartIcon from '../../assets/images/fillhearticon.png';
-import { useDispatch } from 'react-redux';
-import { addToCart, addToWishlist } from '../Redux/Slice/Slice';
+import { useDispatch, useSelector } from 'react-redux';
+import { addToCart, addToWishlist, removeFromCart } from '../Redux/Slice/Slice';
 import addedCart from '../../assets/images/addedCart.png';
 import { removeFromWishlist } from '../Redux/Slice/Slice';
 
 const ProductDetails = ({ route }) => {
   const dispatch = useDispatch();
+  const wishlistItems = useSelector(state => state.wishlist.items);
+  const cartProduct = useSelector(state => state.cart.items);
+
   const product = route.params;
   const [addWishlist, setAddWishlist] = useState(false);
-  const [fillCart, setFillCart] = useState(false);
   const [wishlistItem, setWishlistItem] = useState([]);
   const [cartItems, setCartItems] = useState([]);
+
+  // Checking item is present or not
+  const matchedItem = wishlistItems.find(item => item.id === route.params.id);
+  const cartMatchedItems = cartProduct.find(item => item.id === route.params.id);
+
   const handleRemoveWishlist = id => {
     dispatch(removeFromWishlist(id));
     setAddWishlist(!addToWishlist);
   };
 
-  const handleAddWishlist = product => {
+  const handleAddWishlist = () => {
     // Saving items to redux store
-    setWishlistItem(prevItems => {
-      const updatedItems = [...prevItems, product];
-      dispatch(addToWishlist(updatedItems));
-    });
+    setWishlistItem(dispatch(addToWishlist(product)));
     // changing wishlist icon
     setAddWishlist(!addWishlist);
   };
@@ -43,31 +47,29 @@ const ProductDetails = ({ route }) => {
   // Handle cart
   const handleCart = () => {
     // Saving items to redux store
-    setCartItems(prevItems => {
-      const updatedItems = [...prevItems, product];
-      console.log("data from updated items",updatedItems)
-      dispatch(addToCart(updatedItems));
-    });
-    setFillCart(!fillCart);
+    setCartItems(dispatch(addToCart(product)));
   };
 
-  const handleRemoveCartItem = () =>{
-    setFillCart(!fillCart);
-
-  }
+  const handleRemoveCartItem = id => {
+    dispatch(removeFromCart(id));
+  };
 
   return (
     <View style={styles.container}>
       <View>
         <ItemHeader itemName={'Headphone'} />
       </View>
-      <ScrollView showsVerticalScrollIndicator={false} scrollEnabled={true}>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        scrollEnabled={true}
+        style={{}}
+      >
         {/* image section */}
         <View style={styles.imageContainer}>
           <Image source={product.productImage} style={styles.imageStyle} />
           {/* cart and wishlist icon  */}
           <View style={styles.iconContainer}>
-            {addWishlist ? (
+            {matchedItem ? (
               <TouchableOpacity
                 style={styles.wishlistContainer}
                 onPress={() => handleRemoveWishlist(product.id)}
@@ -91,10 +93,10 @@ const ProductDetails = ({ route }) => {
               </TouchableOpacity>
             )}
             {/* cart icon  */}
-            {fillCart ? (
+            {cartMatchedItems ? (
               <TouchableOpacity
                 style={styles.cartContainer}
-                onPress={() => handleRemoveCartItem()}
+                onPress={() => handleRemoveCartItem(product.id)}
               >
                 <Image
                   source={addedCart}
@@ -118,7 +120,7 @@ const ProductDetails = ({ route }) => {
         </View>
         {/* product details  */}
         <View style={styles.productDetail}>
-          <Text style={styles.productPrice}>{product.price}</Text>
+          <Text style={styles.productPrice}>{`$${product.price}`}</Text>
           <Text style={styles.productPrice}>{product.productName}</Text>
           <Text style={styles.productModel}>{product.model}</Text>
         </View>
@@ -179,6 +181,7 @@ const styles = StyleSheet.create({
   },
   productDiscription: {
     marginTop: 20,
+    marginBottom: 100,
   },
   wishlistIcon: {
     height: '80%',

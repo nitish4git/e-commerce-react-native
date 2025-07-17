@@ -20,21 +20,21 @@ import Amex from '../assets/images/paymentGateway/Amex.png';
 export const products = [
   {
     id: '1',
-    price: '$349.99',
+    price: '349.99',
     productName: 'SONY Premium Wireless Headphones',
     model: 'WH-1000XM4, Black',
     image: headphoneBlack,
   },
   {
     id: '2',
-    price: '$179.00',
+    price: '179.00',
     productName: 'APPLE AirPods Pro MagSafe Case',
     model: 'NC, 4 h, Wireless',
     image: appleBuds,
   },
   {
     id: '3',
-    price: '$119.99',
+    price: '119.99',
     discountPrice: '$149.99',
     productName: 'SAMSUNG Galaxy Buds 2 Pro',
     model: 'NC, 6 h, Wireless',
@@ -42,15 +42,15 @@ export const products = [
   },
   {
     id: '4',
-    price: '$1,499.99',
+    price: '1,499.99',
     //   discountPrice:"$149.99",
     productName: 'SONY Alpha 7 IV ',
-    model: 'Full-frame Interchangeable Lens Camera 33MP, 10FPS, 4K/60p',
+    model: 'Full-frame Interchangeable Lens Camera',
     image: SonyCamera,
   },
   {
     id: '5',
-    price: '$379.49',
+    price: '379.49',
     //   discountPrice:"$149.99",
     productName: 'SHURE SM7B',
     model: 'Studio microphone',
@@ -58,7 +58,7 @@ export const products = [
   },
   {
     id: '6',
-    price: '$94.90',
+    price: '94.90',
     //   discountPrice:"$149.99",
     productName: 'XIAOMI Redmi Watch 3',
     model: '42.58 mm, Aluminium, Plastic, One size',
@@ -66,7 +66,7 @@ export const products = [
   },
   {
     id: '7',
-    price: '$349.99',
+    price: '349.99',
     //   discountPrice:"$149.99",
     productName: 'SONY Premium Wireless Headphones',
     model: 'Model: WH-1000XM4, Beige',
@@ -74,7 +74,7 @@ export const products = [
   },
   {
     id: '8',
-    price: '$108.20',
+    price: '108.20',
     discountPrice: '$199.99',
     productName: 'RØDE PodMic',
     model: 'Dynamic microphone, Speaker microphone',

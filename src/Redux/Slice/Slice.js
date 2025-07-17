@@ -1,15 +1,26 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { Alert } from 'react-native';
 
 const initialState = {
   items: [],
 };
-//  Slice For Wishlist Items 
+//  Slice For Wishlist Items
 const wishlistSlice = createSlice({
   name: 'wishlist',
   initialState,
   reducers: {
     addToWishlist: (state, action) => {
-      state.items.push(action.payload);
+      const product = action.payload; // taking product from user
+      const existingItem = state.items.find(item => item.id === product.id); //checking is item present or not
+      if (existingItem) {
+        //if item is present only increase the quantity of the product
+        // existingItem.quantity += 1
+        Alert.alert('This item is already in cart');
+      } else {
+        // if item is not present then insert new item with quantity one
+        state.items.push({ ...product, quantity: 1 });
+        Alert.alert('Item added to wishlist successfully!');
+      }
     },
     removeFromWishlist: (state, action) => {
       state.items = state.items.filter(item => item.id !== action.payload);
@@ -17,23 +28,50 @@ const wishlistSlice = createSlice({
   },
 });
 
-// Slice for cart items 
+// Slice for cart items
 
 const cartSlice = createSlice({
-  name:"cart",
+  name: 'cart',
   initialState,
-  reducers:{
-    addToCart:(state,action) =>{
-      state.items.push(action.payload);
+  reducers: {
+    // Addding to Cart.....
+    addToCart: (state, action) => {
+      const product = action.payload;
+      const existingItem = state.items.find(item => item.id === product.id);
+      if (existingItem) {
+        existingItem.quantity += 1;
+      } else {
+        state.items.push({ ...product, quantity: 1 });
+        Alert.alert('Item added to Cart successfully!');
+      }
     },
-    removeFromCart:(state , action) =>{
-      state.items = state.items.filter(item => item.id !== action.payload)
-    }
-  }
-})
+    // Removing From cart.....
+    removeFromCart: (state, action) => {
+      state.items = state.items.filter(item => item.id !== action.payload);
+    },
+    // Increading the no. of quantity
+    increaseQuantity: (state, action) => {
+      const product = action.payload;
+      console.log(product, 'same data');
+      const existingItem = state.items.find(item => item.id === product.id);
+      console.log(existingItem, 'data from increase redux');
+      if (existingItem) {
+        existingItem.quantity += 1;
+      }
+    },
+    // Decreasing the quantity
+    decreaseQuantity: (state, action) => {
+      const product = action.payload;
+      const existingItem = state.items.find(item => item.id === product.id);
+      if (existingItem) {
+        existingItem.quantity -= 1
+      }
+    },
+  },
+});
 export const { addToWishlist, removeFromWishlist } = wishlistSlice.actions;
 export const wishlistReducer = wishlistSlice.reducer;
-export const {addToCart , removeFromCart} = cartSlice.actions;
-export const cartReducer =  cartSlice.reducer;
 
-
+export const { addToCart, removeFromCart, increaseQuantity , decreaseQuantity } =
+  cartSlice.actions;
+export const cartReducer = cartSlice.reducer;

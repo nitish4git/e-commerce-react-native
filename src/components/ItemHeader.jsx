@@ -16,8 +16,8 @@ const ItemHeader = (props) => {
         <Text style={styles.headerText}>{props.itemName}</Text>
       </View>
       {/* for search icon  */}
-      <TouchableOpacity style={styles.searchIconContainer}>
-        <Image source={searchIcon} resizeMode='cover'style={styles.searchIcon}/>
+      <TouchableOpacity style={styles.searchIconContainer} onPress={()=>navigation.navigate('SearchProduct')}>
+        <Image source={searchIcon} resizeMode='cover'style={styles.searchIcon} />
       </TouchableOpacity>
     </View>
   );

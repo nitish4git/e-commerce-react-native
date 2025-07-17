@@ -1,26 +1,40 @@
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { decreaseQuantity, increaseQuantity } from '../Redux/Slice/Slice';
+import { useSelector } from 'react-redux';
+const Counter = (props) => {
+  const dispatch = useDispatch();
+  const cartItem = useSelector(state => state.cart.items)
+  const productQuantity = cartItem.find(item => item.id === props.id)
+  
+  
 
-const Counter = () => {
+
     const [counter ,setCounter] = useState(1)
-    const handleMinusCounter = () =>{
-        if(counter === 0){
+    const handleMinusCounter = (item) =>{
+        if(item.quantity === 0){
             return
         }
-        if(counter > 0 ){
-            setCounter(counter - 1)
+        if(item.quantity > 0 ){
+          dispatch(decreaseQuantity(item))
         }
 
     }
+   
+    const handleIncreaseBtn = (item) =>{
+        dispatch(increaseQuantity(item))
+        console.log(item,"data when button is clicked")
+    }
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={styles.minusBtn} onPress={handleMinusCounter}>
+      <TouchableOpacity style={styles.minusBtn} onPress={()=>handleMinusCounter(props)}>
         <Text style={{ fontSize: 15 }}>-</Text>
       </TouchableOpacity>
       <View style={styles.counterDisplay}>
-        <Text style={{ fontWeight: 500, fontSize: 14 }}>{counter}</Text>
+        <Text style={{ fontWeight: 500, fontSize: 14 }}>{productQuantity.quantity}</Text>
       </View>
-      <TouchableOpacity style={styles.plusBtn} onPress={()=>setCounter(counter + 1)}>
+      <TouchableOpacity style={styles.plusBtn} onPress={()=>handleIncreaseBtn(props)}>
         <Text style={{ color: 'white' }}>+</Text>
       </TouchableOpacity>
     </View>

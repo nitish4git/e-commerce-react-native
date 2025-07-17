@@ -32,7 +32,7 @@ const Cartcomponent = (props) => {
               style={styles.menuStyle}
             />
           </TouchableOpacity>
-          <Counter />
+          <Counter id={props.id} productName={props.productName} image={props.image} productModel={props.productModel} quantity={props.quantity}/>
         </View>
       </View> 
     </View>
