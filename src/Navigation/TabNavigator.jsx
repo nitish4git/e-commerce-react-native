@@ -1,11 +1,11 @@
 import { Image, StyleSheet, Text, View } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import Home from '../screens/Home';
-import Browse from '../screens/Browse';
-import Favourites from '../screens/Favourites';
-import Cart from '../screens/Cart';
-import Profile from '../screens/Profile';
+import Home from '../Tabs/Home';
+import Browse from '../Tabs/Browse';
+import Favourites from '../Tabs/Favourites';
+import Cart from '../Tabs/Cart';
+import Profile from '../Tabs/Profile';
 import homeIcon from '../../assets/images/house.png';
 import browseIcon from '../../assets/images/loupe.png';
 import heartIcon from '../../assets/images/heart.png';
@@ -19,15 +19,17 @@ const TabNavigation = () => {
   const [cartBadgeCount, setCartBadgeCount] = useState(0);
 
   // Getting cart total items.
-  const wishlistItems = useSelector(state => state.wishlist.items)
-  useEffect(()=>{
-    setWishlistBadgeCount(wishlistItems.length)
-  },[wishlistItems])
+  const wishlistItems = useSelector(state => state.wishlist.items);
+  useEffect(() => {
+    setWishlistBadgeCount(wishlistItems.length);
+  }, [wishlistItems]);
+
   // Getting Cart total items
-  const cartItems = useSelector(state => state.cart.items)
-  useEffect(()=>{
-    setCartBadgeCount(cartItems.length)
-  },[cartItems])
+  const cartItems = useSelector(state => state.cart.items);
+  useEffect(() => {
+    setCartBadgeCount(cartItems.length);
+  }, [cartItems]);
+  
   return (
     <Tab.Navigator
       initialRouteName="Home"

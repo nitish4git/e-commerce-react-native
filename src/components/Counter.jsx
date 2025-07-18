@@ -1,40 +1,41 @@
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { decreaseQuantity, increaseQuantity, removeFromCart } from '../Redux/Slice/Slice';
+import {
+  decreaseQuantity,
+  increaseQuantity,
+  removeFromCart,
+} from '../Redux/Slice/Slice';
 import { useSelector } from 'react-redux';
-const Counter = (props) => {
+const Counter = props => {
   const dispatch = useDispatch();
-  const cartItem = useSelector(state => state.cart.items)
-  const productQuantity = cartItem.find(item => item.id === props.id)
-  
-  
+  const cartItem = useSelector(state => state.cart.items);
+  const productQuantity = cartItem.find(item => item.id === props.id);
 
+  const handleMinusCounter = item => {
+      dispatch(decreaseQuantity(item));
+  };
 
-    const [counter ,setCounter] = useState(1)
-    const handleMinusCounter = (item) =>{
-        if(item.quantity === 0){
-          console.log(item.quantity,"from coutner")
-            dispatch(removeFromCart(item))
-        }
-        if(item.quantity > 0 ){
-          dispatch(decreaseQuantity(item))
-        }
-
-    }
-   
-    const handleIncreaseBtn = (item) =>{
-        dispatch(increaseQuantity(item))
-    }
+  const handleIncreaseBtn = item => {
+    dispatch(increaseQuantity(item));
+  };
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={styles.minusBtn} onPress={()=>handleMinusCounter(props)}>
+      <TouchableOpacity
+        style={styles.minusBtn}
+        onPress={() => handleMinusCounter(props)}
+      >
         <Text style={{ fontSize: 15 }}>-</Text>
       </TouchableOpacity>
       <View style={styles.counterDisplay}>
-        <Text style={{ fontWeight: 500, fontSize: 14 }}>{productQuantity.quantity}</Text>
+        <Text style={{ fontWeight: 500, fontSize: 14 }}>
+          {productQuantity.quantity}
+        </Text>
       </View>
-      <TouchableOpacity style={styles.plusBtn} onPress={()=>handleIncreaseBtn(props)}>
+      <TouchableOpacity
+        style={styles.plusBtn}
+        onPress={() => handleIncreaseBtn(props)}
+      >
         <Text style={{ color: 'white' }}>+</Text>
       </TouchableOpacity>
     </View>
@@ -67,8 +68,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-//   counterDisplay: {
-//     height: 16,
-//     width: 16,
-//   },
+  //   counterDisplay: {
+  //     height: 16,
+  //     width: 16,
+  //   },
 });

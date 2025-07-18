@@ -30,7 +30,9 @@ const ProductDetails = ({ route }) => {
 
   // Checking item is present or not
   const matchedItem = wishlistItems.find(item => item.id === route.params.id);
-  const cartMatchedItems = cartProduct.find(item => item.id === route.params.id);
+  const cartMatchedItems = cartProduct.find(
+    item => item.id === route.params.id,
+  );
 
   const handleRemoveWishlist = id => {
     dispatch(removeFromWishlist(id));
@@ -59,10 +61,7 @@ const ProductDetails = ({ route }) => {
       <View>
         <ItemHeader itemName={'Headphone'} />
       </View>
-      <ScrollView
-        showsVerticalScrollIndicator={false}
-        style={{}}
-      >
+      <ScrollView showsVerticalScrollIndicator={false} style={{}}>
         {/* image section */}
         <View style={styles.imageContainer}>
           <Image source={product.productImage} style={styles.imageStyle} />
@@ -81,7 +80,7 @@ const ProductDetails = ({ route }) => {
               </TouchableOpacity>
             ) : (
               <TouchableOpacity
-              activeOpacity={0.8}
+                activeOpacity={0.8}
                 style={styles.wishlistContainer}
                 onPress={() => handleAddWishlist(product)}
               >

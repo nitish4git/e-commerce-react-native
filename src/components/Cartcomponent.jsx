@@ -1,10 +1,10 @@
-import { StyleSheet, Text, View ,Image,TouchableOpacity} from 'react-native'
+import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 import React, { useEffect } from 'react';
 import Counter from './Counter';
-import watchImage from "../../assets/images/ProductImages/watchImage.png";
-import menu from '../../assets/images/dots.png'
+import watchImage from '../../assets/images/ProductImages/watchImage.png';
+import menu from '../../assets/images/dots.png';
 
-const Cartcomponent = (props) => {
+const Cartcomponent = props => {
   return (
     <View>
       <View style={styles.cardContainer}>
@@ -19,9 +19,7 @@ const Cartcomponent = (props) => {
         <View style={styles.detailContainer}>
           <Text style={styles.priceStyle}>{props.price}</Text>
           <Text style={styles.productNameStyle}>{props.productName}</Text>
-          <Text style={styles.modelStyle}>
-            {props.productModel}
-          </Text>
+          <Text style={styles.modelStyle}>{props.productModel}</Text>
         </View>
         {/* counter  */}
         <View style={styles.counterContainer}>
@@ -32,17 +30,23 @@ const Cartcomponent = (props) => {
               style={styles.menuStyle}
             />
           </TouchableOpacity>
-          <Counter id={props.id} productName={props.productName} image={props.image} productModel={props.productModel} quantity={props.quantity}/>
+          <Counter
+            id={props.id}
+            productName={props.productName}
+            image={props.image}
+            productModel={props.productModel}
+            quantity={props.quantity}
+          />
         </View>
-      </View> 
+      </View>
     </View>
-  )
-}
+  );
+};
 
-export default Cartcomponent
+export default Cartcomponent;
 
 const styles = StyleSheet.create({
-    cardContainer: {
+  cardContainer: {
     height: 88,
     width: '100%',
     marginTop: 32,
@@ -50,20 +54,22 @@ const styles = StyleSheet.create({
     gap: 15,
     justifyContent: 'center',
     alignItems: 'center',
-  }, imageContainer: {
+  },
+  imageContainer: {
     height: '100%',
     backgroundColor: '#f5f5f5',
     width: 88,
     borderRadius: 20,
   },
-   imageStyle: {
+  imageStyle: {
     height: '100%',
     width: '100%',
   },
   detailContainer: {
     width: 160,
     height: '100%',
-  },priceStyle: {
+  },
+  priceStyle: {
     fontSize: 14,
     color: 'red',
     fontWeight: 800,
@@ -88,4 +94,4 @@ const styles = StyleSheet.create({
     left: 55,
     marginBottom: 12,
   },
-})
+});

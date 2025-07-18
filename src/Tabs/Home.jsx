@@ -1,23 +1,16 @@
-import { StyleSheet, Text, View } from 'react-native'
 import React from 'react';
-import { createStackNavigator } from '@react-navigation/stack';
-import Homescreen from './HomeScreens/Homescreen'
-import ProductDetails from '../components/ProductDetails';
+import Homescreen from '../screens/HomeScreens/Homescreen'
 
-const Stack = createStackNavigator()
 const Home = () => {
   return (
-    <Stack.Navigator>
-      <Stack.Screen name='Homescreen' component={Homescreen} options={{headerShown:false}}/>
-      {/* <Stack.Screen name='ProductDetails' component={ProductDetails} options={{headerShown:false}}/> */}
-
-    </Stack.Navigator>
+    <>
+    <Homescreen/>
+    </>
   )
 }
 
 export default Home
 
-const styles = StyleSheet.create({})
 
 
 

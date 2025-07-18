@@ -64,9 +64,9 @@ const cartSlice = createSlice({
       if (existingItem) {
         existingItem.quantity -= 1;
       }
-      if (existingItem.quantity <= 0) {
+      if (existingItem.quantity === 0) {
         state.items = state.items.filter(item => {
-          item.id !== product;
+          item.id !== product.id;
         });
       }
     },

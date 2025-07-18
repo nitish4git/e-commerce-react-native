@@ -33,9 +33,12 @@ const Category = () => {
         renderItem={({ item, index }) => {
           return (
             <View style={styles.container}>
-              <TouchableOpacity onPress={()=>setSelectedCategory(item)}>
+              <TouchableOpacity onPress={() => setSelectedCategory(item)}>
                 <Text
-                  style={[index === 0 ? styles.firstElemt : styles.categoryName , selectedCategory.id == item.id ? styles.selectedItem:null ]}
+                  style={[
+                    index === 0 ? styles.firstElemt : styles.categoryName,
+                    selectedCategory.id == item.id ? styles.selectedItem : null,
+                  ]}
                 >
                   {item.title}
                 </Text>
@@ -66,7 +69,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     // fontWeight: '400',
   },
-  selectedItem:{
-    color:'black'
-  }
+  selectedItem: {
+    color: 'black',
+  },
 });
