@@ -1,7 +1,7 @@
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { decreaseQuantity, increaseQuantity } from '../Redux/Slice/Slice';
+import { decreaseQuantity, increaseQuantity, removeFromCart } from '../Redux/Slice/Slice';
 import { useSelector } from 'react-redux';
 const Counter = (props) => {
   const dispatch = useDispatch();
@@ -14,7 +14,8 @@ const Counter = (props) => {
     const [counter ,setCounter] = useState(1)
     const handleMinusCounter = (item) =>{
         if(item.quantity === 0){
-            return
+          console.log(item.quantity,"from coutner")
+            dispatch(removeFromCart(item))
         }
         if(item.quantity > 0 ){
           dispatch(decreaseQuantity(item))

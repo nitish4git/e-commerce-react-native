@@ -61,7 +61,6 @@ const ProductDetails = ({ route }) => {
       </View>
       <ScrollView
         showsVerticalScrollIndicator={false}
-        scrollEnabled={true}
         style={{}}
       >
         {/* image section */}
@@ -82,6 +81,7 @@ const ProductDetails = ({ route }) => {
               </TouchableOpacity>
             ) : (
               <TouchableOpacity
+              activeOpacity={0.8}
                 style={styles.wishlistContainer}
                 onPress={() => handleAddWishlist(product)}
               >

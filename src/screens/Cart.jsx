@@ -8,7 +8,7 @@ const Cart = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen name='Cartscreen' component={Cartscreen} options={{headerShown:false}}/>
-      <Stack.Screen name='ProductDetails' component={ProductDetails} options={{headerShown:false}}/>
+      {/* <Stack.Screen name='ProductDetails' component={ProductDetails} options={{headerShown:false}}/> */}
 
     </Stack.Navigator>
   )

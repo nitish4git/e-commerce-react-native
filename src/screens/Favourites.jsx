@@ -12,7 +12,7 @@ const Favourites = () => {
         component={Favouritescreen}
         options={{ headerShown: false }}
       />
-      <Stack.Screen name='ProductDetails' component={ProductDetails} options={{headerShown:false}}/>
+      {/* <Stack.Screen name='ProductDetails' component={ProductDetails} options={{headerShown:false}}/> */}
 
     </Stack.Navigator>
   );

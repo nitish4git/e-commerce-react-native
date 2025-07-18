@@ -73,7 +73,7 @@ const Browse = () => {
         component={TvcinemaScreen}
         options={{ headerShown: false }}
       />
-      <Stack.Screen name='ProductDetails' component={ProductDetails} options={{headerShown:false}}/>
+      {/* <Stack.Screen name='ProductDetails' component={ProductDetails} options={{headerShown:false}}/> */}
     </Stack.Navigator>
   );
 };

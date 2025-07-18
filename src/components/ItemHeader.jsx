@@ -36,11 +36,11 @@ const styles = StyleSheet.create({
   leftIconContainer:{
     height:14,width:14
   },leftIcon:{
-    height:"100%",width:"100%"
+    height:"150%",width:"150%",
   },searchIconContainer:{
     height:14,width:14,
   },searchIcon:{
-    height:"100%",width:"100%",
+    height:"150%",width:"150%",
   },headerText:{
     fontSize:14,fontWeight:"bold"
   }

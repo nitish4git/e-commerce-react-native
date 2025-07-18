@@ -62,7 +62,12 @@ const cartSlice = createSlice({
       const product = action.payload;
       const existingItem = state.items.find(item => item.id === product.id);
       if (existingItem) {
-        existingItem.quantity -= 1
+        existingItem.quantity -= 1;
+      }
+      if (existingItem.quantity <= 0) {
+        state.items = state.items.filter(item => {
+          item.id !== product;
+        });
       }
     },
   },
@@ -70,6 +75,6 @@ const cartSlice = createSlice({
 export const { addToWishlist, removeFromWishlist } = wishlistSlice.actions;
 export const wishlistReducer = wishlistSlice.reducer;
 
-export const { addToCart, removeFromCart, increaseQuantity , decreaseQuantity } =
+export const { addToCart, removeFromCart, increaseQuantity, decreaseQuantity } =
   cartSlice.actions;
 export const cartReducer = cartSlice.reducer;

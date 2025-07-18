@@ -7,20 +7,27 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import ItemHeader from '../../components/ItemHeader';
 
 import cartIcon from '../../../assets/images/online-shopping.png';
 import menuIcon from '../../../assets/images/dots.png';
-import emptyWishlist from '../../../assets/images/emptyWishlist.png'
+import emptyWishlist from '../../../assets/images/emptyWishlist.png';
 import { useNavigation } from '@react-navigation/native';
+import { removeFromCart } from '../../Redux/Slice/Slice';
 
 const Favourites = () => {
   const wishlistItems = useSelector(state => state.wishlist.items);
+  const dispatch = useDispatch();
+  const cartItems = useSelector(state => state.cart.items);
   const flatWishlistItems = wishlistItems.flat();
   const [loader, setLoader] = useState(true);
   const navigation = useNavigation();
+
+  const handleCartRemove = (id)=>{
+    dispatch(removeFromCart(id))
+  }
   return (
     <View style={styles.container}>
       <View>
@@ -31,6 +38,9 @@ const Favourites = () => {
           data={flatWishlistItems}
           keyExtractor={(item, index) => index.toString()}
           renderItem={({ item, index }) => {
+            const isItemMatched = cartItems.find(
+              cartItem => cartItem.id === item.id,
+            );
             return (
               <TouchableOpacity
                 style={{
@@ -83,21 +93,29 @@ const Favourites = () => {
                 </View>
 
                 {/* for cart icon  */}
-                <View
+                <TouchableOpacity
                   style={{
                     height: 40,
                     width: 40,
-                    backgroundColor: '#f5f5f5',
+                    backgroundColor: isItemMatched ? 'black' : '#f5f5f5',
                     borderRadius: 10,
                     justifyContent: 'center',
                     alignItems: 'center',
                   }}
+                  onPress={()=>handleCartRemove(item.id)}
                 >
                   <Image
                     source={cartIcon}
-                    style={{ height: 20, width: 20, resizeMode: 'contain' }}
+                    style={{
+                      height: 20,
+                      width: 20,
+                      resizeMode: 'contain',
+                      tintColor: !isItemMatched ? 'black' : '#f5f5f5',
+                    }}
                   />
-                </View>
+                </TouchableOpacity>
+                {/* } */}
+
                 {/* for more options  */}
                 <View
                   style={{
@@ -119,8 +137,21 @@ const Favourites = () => {
         />
       ) : (
         <View style={styles.emptywishlistcontainer}>
-          <Image source={emptyWishlist} resizeMode='contain' style={styles.emptyWishlistStyle}/>
-          <Text style={{fontWeight:800,letterSpacing:1,fontSize:18,color:"gray"}}>No Favourite Items</Text>
+          <Image
+            source={emptyWishlist}
+            resizeMode="contain"
+            style={styles.emptyWishlistStyle}
+          />
+          <Text
+            style={{
+              fontWeight: 800,
+              letterSpacing: 1,
+              fontSize: 18,
+              color: 'gray',
+            }}
+          >
+            No Favourite Items
+          </Text>
         </View>
       )}
     </View>
@@ -138,12 +169,15 @@ const styles = StyleSheet.create({
   activityIndicator: {
     marginTop: '50%',
   },
-  emptywishlistcontainer:{
-    display:"flex",
-    justifyContent:"center"
-    ,alignItems:"center",flex:1
+  emptywishlistcontainer: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    flex: 1,
   },
-  emptyWishlistStyle:{
-    height:80,width:80,marginBottom:20
-  }
+  emptyWishlistStyle: {
+    height: 80,
+    width: 80,
+    marginBottom: 20,
+  },
 });

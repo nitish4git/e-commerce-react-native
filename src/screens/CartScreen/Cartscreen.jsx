@@ -28,13 +28,14 @@ const Cartscreen = () => {
   const navigation = useNavigation();
   return (
     <View style={styles.container}>
-      <ItemHeader itemName="Cart" />
+      <ItemHeader itemName="Cart"  headerIcon={false}/>
       {cartItems.length > 0 ? (
         <>
           <View>
             <FlatList
               data={flatCartItems}
               renderItem={({ item, index }) => {
+              
                 return (
                   <TouchableOpacity
                     onPress={() =>
@@ -77,16 +78,16 @@ const Cartscreen = () => {
                 >{`$${totalPrice}`}</Text>
               </View>
             </View>
-            <TouchableOpacity style={styles.checkoutBtn}>
+            <TouchableOpacity activeOpacity={0.8} style={styles.checkoutBtn}>
               <Text style={styles.checkoutText}>Checkout</Text>
             </TouchableOpacity>
             <View>
               <FlatList
                 data={paymentGatewayIcons}
                 horizontal
-                renderItem={({ item }) => {
+                renderItem={({ item,index }) => {
                   return (
-                    <View style={styles.paymentIcons}>
+                    <View style={styles.paymentIcons} key={index}>
                       <Image source={item.name} />
                     </View>
                   );
