@@ -13,13 +13,15 @@ import Icon from 'react-native-vector-icons/SimpleLineIcons';
 import { launchImageLibrary, launchCamera } from 'react-native-image-picker';
 import userIcon from '../../assets/images/user.png';
 import { requestGalleryPermission } from '../utils/Permission_Utils';
+import Modalpopup from '../components/Modal/ModalPopup';
+import BottomModal from "../components/Modal/BottomModal"
 
 const Profile = () => {
   const [pickImage, setPickImage] = useState(null);
   const [cameraImage, setCameraImage] = useState(null);
 
   // Taking Gallery permission
-   
+
   const openGallery = async () => {
     const allowed = await requestGalleryPermission();
     console.log(allowed, 'from profile.js');
@@ -63,6 +65,17 @@ const Profile = () => {
       >
         <Icon name="pencil" size={20} color="white" />
       </TouchableOpacity>
+
+<View style={{gap:20}}>
+      <BottomModal/>
+      <Modalpopup
+      miniMsg="Success!"
+              majorMsg="Congraa!,You are eligilebe for the test. Best of Luck"
+              btnText="Go Ahead"
+              color={"green"}
+              Icon={true}
+      />
+</View>
     </View>
   );
 };
